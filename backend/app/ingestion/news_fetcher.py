@@ -1,15 +1,29 @@
 import feedparser
 
 def fetch_news(url):
-    feed = feedparser.parse(url) #feedparser.parser is a library that parses RSS feeds and returns a structured object containing the feed's metadata and entries. 
+    try:
+        feed = feedparser.parse(url)
+        source = feed.feed.get("title", "Unknown")   # ← 整个源的名字
+        articles = []
+        for entry in feed.entries:
+            article = {
+                "title": entry.title,
+                "link": entry.link,
+                "summary": entry.summary,
+                "source": source,                     # ← 新增:真实来源
+            }
+            articles.append(article)
+        return articles
+    except Exception as e:
+            print(f"[news_fetcher] 抓取失败 {url}: {e}")
+            return []
 
-    articles = [ ]
-    for entry in feed.entries: #feed.entries is a list of entries in the feed, where each entry is a dictionary containing the entry's metadata and content.
-        article = {
-            "title":entry.title, #entry.title is the title of the entry.
-            "link": entry.link, #entry.link is the link to the entry.
-            "summary": entry.summary, #entry.summary is the summary of the entry.
-        }
-        articles.append(article) #append the article to the articles list.
-    return articles #return the articles list.
-
+def fetch_all_news(urls, per_source=5):
+    all_articles = []
+    for url in urls:
+        try:
+            articles = fetch_news(url)
+            all_articles += articles[:per_source]    # ← 每个源只取前 N 条
+        except Exception as e:
+            print(f"[fetch_all_news] 跳过失败的源 {url}: {e}")
+    return all_articles

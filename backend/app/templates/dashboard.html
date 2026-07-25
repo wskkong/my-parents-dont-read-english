@@ -2,7 +2,8 @@
 <html lang="{{ lang }}">
 <head>
     <meta charset="UTF-8">
-    <title>Daily Briefing</title>
+    <title>{{ "Daily Briefing" if lang == "EN" else "每日简报" }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body { font-family: -apple-system, sans-serif; max-width: 800px;
                margin: 40px auto; padding: 0 20px; line-height: 1.6; }
@@ -10,12 +11,12 @@
         .toggle a { padding: 6px 14px; border: 1px solid #ccc;
                     border-radius: 6px; text-decoration: none; color: #333; }
         .toggle a.active { background: #333; color: white; }
-        .content { white-space: pre-wrap; }
+        .content { }
         .meta { color: #888; font-size: 0.9em; }
     </style>
 </head>
 <body>
-    <h1>📅 Daily Briefing</h1>
+    <h1>{{ "Daily Briefing" if lang == "EN" else "每日简报" }}</h1>
 
     <div class="toggle">
         <a href="/?lang=EN" class="{{ 'active' if lang == 'EN' else '' }}">English</a>
@@ -24,9 +25,25 @@
 
     {% if briefing %}
         <p class="meta">{{ briefing.date }} · {{ briefing.level }}</p>
-        <div class="content">{{ briefing.content }}</div>
+
+        <div class="content" id="briefing-content"></div>
+        <script>
+            const raw = {{ briefing.content | tojson }};
+            document.getElementById("briefing-content").innerHTML = marked.parse(raw);
+        </script>
+
+        {% if briefing.sources %}
+        <h3>{{ "Sources" if lang == "EN" else "来源" }}</h3>
+        <ul>
+            {% for line in briefing.sources.split("\n") %}
+                {% set parts = line.split("|||") %}
+                <li><a href="{{ parts[1] }}" target="_blank">{{ parts[0] }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
     {% else %}
-        <p>还没有简报,请先生成一份。</p>
+        <p>{{ "No briefing yet. Please generate one first." if lang == "EN" else "还没有简报,请先生成一份。" }}</p>
     {% endif %}
 </body>
 </html>

@@ -7,6 +7,7 @@ class Briefing(SQLModel, table=True):
     level: str
     lang: str
     content: str
+    sources: str = ""          # ← 新增:存来源清单(标题+链接)
     generated_at: datetime = Field(default_factory=datetime.now)
 
     
