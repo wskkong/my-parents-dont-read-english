@@ -2,12 +2,13 @@ from sqlmodel import SQLModel, create_engine, Session
 from app.config import settings
 from app.models.briefing import Briefing  # 导入蓝图,create_all 才知道要建哪些表
 
-# Railway 给的是 postgresql://,但我们用的驱动是 psycopg v3,
-# 需要把它改成 postgresql+psycopg:// 让 SQLAlchemy 用对驱动
 database_url = settings.database_url
-if database_url.startswith("postgresql://"):
-    database_url = database_url.replace("postgresql://", "postgresql+psycopg://", 1)
 
+# Railway 可能给 postgres:// 或 postgresql://,统一转成 psycopg v3 格式
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql+psycopg://", 1)
+elif database_url.startswith("postgresql://"):
+    database_url = database_url.replace("postgresql://", "postgresql+psycopg://", 1)
 
 # SQLite 需要 check_same_thread=False;Postgres 不需要
 connect_args = {"check_same_thread": False} if settings.database_url.startswith("sqlite") else {}
