@@ -20,3 +20,12 @@ class StockSplit(SQLModel, table=True):
     ratio_from: float               # 拆分前(如 1)
     ratio_to: float                 # 拆分后(如 4)= 1拆4
     account: str = ""
+    
+class Dividend(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    symbol: str                     # 哪只股票的股息
+    amount: float                   # 股息金额(现金)
+    pay_date: date_type             # 派息日期
+    currency: str = "CAD"           # 币种
+    account: str = ""               # 账户
+    div_type: str = "dividend"      # 类型:dividend / distribution(REIT分配)

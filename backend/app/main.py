@@ -24,7 +24,6 @@ def on_startup():
     else:
         print("[scheduler] 已禁用(ENABLE_SCHEDULER 未开启)")
 
-
 @app.get("/health")
 def health():
     return {"status": "ok"}

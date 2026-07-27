@@ -1,7 +1,7 @@
 from sqlmodel import SQLModel, create_engine, Session
 from app.config import settings
 from app.models.briefing import Briefing  # 导入蓝图,create_all 才知道要建哪些表
-from app.models.transaction import Transaction, StockSplit
+from app.models.transaction import Transaction, StockSplit, Dividend
 
 database_url = settings.database_url
 
