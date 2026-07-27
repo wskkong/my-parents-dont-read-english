@@ -1,6 +1,7 @@
 from sqlmodel import SQLModel, create_engine, Session
 from app.config import settings
 from app.models.briefing import Briefing  # 导入蓝图,create_all 才知道要建哪些表
+from app.models.transaction import Transaction, StockSplit
 
 database_url = settings.database_url
 
@@ -25,3 +26,4 @@ def init_db():
 # 3. 提供数据库会话(以后存/取数据时用)
 def get_session():
     return Session(engine)
+
