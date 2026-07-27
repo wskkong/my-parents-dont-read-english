@@ -36,3 +36,18 @@ def calculate_cost(symbol, account):
         "cost": round(cost, 4),
         "realized_gain": round(realized_gain, 2),
     }
+
+def add_transaction(symbol, action, price, quantity, trade_date, currency="CAD", account=""):
+    tx = Transaction(
+        symbol=symbol,
+        action=action,
+        price=price,
+        quantity=quantity,
+        trade_date=trade_date,
+        currency=currency,
+        account=account,
+    )
+    with get_session() as session:
+        session.add(tx)
+        session.commit()
+    return {"status": "added", "symbol": symbol}
