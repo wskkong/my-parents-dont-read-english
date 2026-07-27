@@ -80,3 +80,12 @@ def has_todays_briefing():
 def get_briefing_by_id(briefing_id):
     with get_session() as session:
         return session.get(Briefing, briefing_id)
+
+def delete_briefing_by_id(briefing_id):
+    with get_session() as session:
+        briefing = session.get(Briefing, briefing_id)
+        if briefing is None:
+            return {"status": "not found", "id": briefing_id}
+        session.delete(briefing)
+        session.commit()
+        return {"status": "deleted", "id": briefing_id}
