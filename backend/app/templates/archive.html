@@ -23,7 +23,10 @@
 
     {% for b in briefings %}
     <div class="item">
-        <a href="/briefing/{{ b.id }}"><span class="date">{{ b.date }}</span> · {{ b.level }} ({{ b.lang }})</a>
+        <a href="/briefing/{{ b.id }}">
+            <span class="date">{{ b.date }}</span> · {{ b.level }} ({{ b.lang }})
+        </a>
+        <span style="color:#999;font-size:0.85em;"> · id: {{ b.id }}</span>
     </div>
     {% else %}
     <p>{{ "No briefings yet." if lang == "EN" else "还没有历史简报。" }}</p>
