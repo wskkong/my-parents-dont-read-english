@@ -27,6 +27,7 @@ This is a simple daily briefing that draws from free news sources like BBC and C
 - **Fact vs. AI, clearly separated** — original headlines and source links are handled by code (never touched by AI, so URLs are never fabricated); AI-generated analysis is explicitly labeled 🤖
 - **Automatic daily updates** — regenerates every morning at 6 AM (Vancouver time) via a scheduler
 - **Clean web dashboard** — read it in the browser, toggle between English / 中文
+- **Browsable archive** — all past briefings are saved and viewable in a dedicated archive page
 
 中文:多源聚合、AI 双语简报(英文版→中文版两个独立版本)、事实与 AI 分析视觉分离(原文链接由代码处理、绝不经过 AI)、每日 06:00 自动更新、网页中英切换。
 
