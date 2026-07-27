@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ "Archive" if lang == "EN" else "历史简报" }}</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; max-width: 800px;
+               margin: 40px auto; padding: 0 20px; line-height: 1.6; }
+        a { color: #333; }
+        .toggle { margin: 16px 0; }
+        .item { padding: 12px 0; border-bottom: 1px solid #eee; }
+        .date { font-weight: 600; }
+    </style>
+</head>
+<body>
+    <h1>{{ "Briefing Archive" if lang == "EN" else "历史简报" }}</h1>
+
+    <p><a href="/?lang={{ lang }}">← {{ "Back to today" if lang == "EN" else "返回今日简报" }}</a></p>
+
+    <div class="toggle">
+        <a href="/archive?lang=EN">English</a> · <a href="/archive?lang=ZH">中文</a>
+    </div>
+
+    {% for b in briefings %}
+    <div class="item">
+        <a href="/briefing/{{ b.id }}"><span class="date">{{ b.date }}</span> · {{ b.level }} ({{ b.lang }})</a>
+    </div>
+    {% else %}
+    <p>{{ "No briefings yet." if lang == "EN" else "还没有历史简报。" }}</p>
+    {% endfor %}
+</body>
+</html>
