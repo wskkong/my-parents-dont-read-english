@@ -11,7 +11,7 @@ elif database_url.startswith("postgresql://"):
     database_url = database_url.replace("postgresql://", "postgresql+psycopg://", 1)
 
 # SQLite 需要 check_same_thread=False;Postgres 不需要
-connect_args = {"check_same_thread": False} if settings.database_url.startswith("sqlite") else {}
+connect_args = {"check_same_thread": False} if database_url.startswith("sqlite") else {}
 
 # 1. 创建"引擎"——连接到数据库文件
 engine = create_engine(database_url, echo=False, connect_args=connect_args)
