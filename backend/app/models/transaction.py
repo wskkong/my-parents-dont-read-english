@@ -9,6 +9,7 @@ class Transaction(SQLModel, table=True):
     price: float                    # 成交单价
     price: float                    # 成交单价(drip: 再投时的买入价)
     quantity: float                 # 数量(drip: 再投买入的股数)
+    trade_date: date_type
     currency: str = "CAD"           # 币种(默认 CAD,美股改 USD)
     account: str = ""               # 账户(TFSA 等)
     
