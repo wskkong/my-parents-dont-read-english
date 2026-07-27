@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     gemini_api_key: str
     database_url: str = "sqlite:///./finance.db"
     timezone: str = "America/Vancouver"
+    enable_scheduler: bool = False  
 
 
 settings = Settings()
