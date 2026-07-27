@@ -1,11 +1,17 @@
 from app.db import get_session
 from app.models.briefing import Briefing
 from sqlmodel import select
-from datetime import date as date_type
 from app.processing.summarizer import summarize_news
 from app.processing.translator import translate_to_chinese
 from app.ingestion.news_fetcher import fetch_news, fetch_all_news
 from app.ingestion.sources import NEWS_SOURCES
+from datetime import datetime
+from zoneinfo import ZoneInfo
+from app.config import settings
+
+def today_str():
+    """按配置的时区(America/Vancouver)返回今天的日期字符串"""
+    return str(datetime.now(ZoneInfo(settings.timezone)).date())
 
 
 def save_briefing(date, level, lang, content,sources=""):
@@ -54,7 +60,7 @@ def run_briefing():
         sources = "\n".join(f"{a['title']}|||{a['link']}" for a in selected)
 
         # 4. 分别存进数据库(两条独立记录)
-        today = str(date_type.today())
+        today = today_str()          # ← 原来是 str(date_type.today())
         save_briefing(today, "International", "EN", english, sources)
         save_briefing(today, "International", "ZH", chinese, sources)
 
@@ -65,7 +71,7 @@ def run_briefing():
         return {"status": "error", "message": "简报生成失败,请稍后再试"}
 
 def has_todays_briefing():
-    today = str(date_type.today())
+    today = today_str()          # ← 原来是 str(date_type.today())
     with get_session() as session:
         statement = select(Briefing).where(Briefing.date == today)
         result = session.exec(statement).first()
