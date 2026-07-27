@@ -19,7 +19,7 @@ def on_startup():
     if settings.enable_scheduler:        # ← 只有开关打开才启动
         start_scheduler()
     else:
-        print("[scheduler] 已禁用(本地开发)")
+        print("[scheduler] 已禁用(ENABLE_SCHEDULER 未开启)")
 
 
 @app.get("/health")
