@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     gemini_api_key: str
     database_url: str = "sqlite:///./finance.db"
     timezone: str = "America/Vancouver"
-    enable_scheduler: bool = False  
+    enable_scheduler: bool = True  
     admin_token: str = "changeme"          # ← 新增:admin 密钥,默认值随便,真实值放 .env/Railway
 
 
