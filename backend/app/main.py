@@ -1,11 +1,8 @@
 from fastapi import FastAPI
-from app.api import briefing        # ← 新增:导入你的路由文件
 from app.db import init_db          # ← 新增:启动时建表
-from app.api import briefing, pages   # ← 改这行:加上 pages
 from app.api import briefing, pages, admin   # 加上 admin
 from app.scheduler.jobs import start_scheduler   # ← 顶部加 import
 from app.config import settings
-from app.api import briefing, pages, admin
 
 
 app = FastAPI(title="Finance Tool API")
