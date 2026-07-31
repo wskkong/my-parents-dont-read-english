@@ -4,7 +4,6 @@ from app.api import briefing, pages, admin   # 加上 admin
 from app.scheduler.jobs import start_scheduler   # ← 顶部加 import
 from app.config import settings
 
-
 app = FastAPI(title="Finance Tool API")
 
 app.include_router(admin.router)             # 新增这行
