@@ -5,7 +5,7 @@ from app.config import settings #then need to import the settings from the confi
 
 client = genai.Client(api_key=settings.gemini_api_key) #create a client object using the gemini_api_key from the settings
 
-def generate(prompt, max_retries=5): #this means that we are defining a function called generate that takes in a prompt and a maximum number of retries as parameters
+def generate(prompt, max_retries=3): #this means that we are defining a function called generate that takes in a prompt and a maximum number of retries as parameters
     for i in range(max_retries): #this means that we are trying to generate content for a maximum of max_retries times
         try:
             response = client.models.generate_content( #this means that we are using the generate_content method from the models module of the client object to generate content based on the prompt provided
@@ -14,6 +14,9 @@ def generate(prompt, max_retries=5): #this means that we are defining a function
                 )
             return response.text
         except Exception as e:
+            if "429" in str(e): #this means that if the error message contains "429", we will print a message indicating that the AI call failed due to too many requests and we will retry
+                print(f"[llm_client] 额度用完，不重试: {e}")
+                raise
             if i < max_retries - 1: #this means that if the current retry count is less than the maximum number of retries minus one, we will print a message indicating that the AI call failed and we will retry
                 print(f"[llm_client] AI 调用失败: {e}, 正在重试...({i+1}/{max_retries})")
                 time.sleep(2**i) #this means that we will wait for 2 seconds before retrying the AI call, and we will increment the retry count by 1
