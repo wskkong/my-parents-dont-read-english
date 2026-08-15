@@ -16,7 +16,7 @@ def generate(prompt, max_retries=5): #this means that we are defining a function
         except Exception as e:
             if i < max_retries - 1: #this means that if the current retry count is less than the maximum number of retries minus one, we will print a message indicating that the AI call failed and we will retry
                 print(f"[llm_client] AI 调用失败: {e}, 正在重试...({i+1}/{max_retries})")
-                time.sleep(2++i) #this means that we will wait for 2 seconds before retrying the AI call, and we will increment the retry count by 1
+                time.sleep(2**i) #this means that we will wait for 2 seconds before retrying the AI call, and we will increment the retry count by 1
             else: #this means that if the current retry count is equal to the maximum number of
                 print(f"[llm_client] AI 调用失败: {e}")
                 raise                    # ← 关键:把错误继续往上抛
