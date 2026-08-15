@@ -8,7 +8,6 @@ app = FastAPI(title="Finance Tool API")
 
 app.include_router(admin.router)             # 新增这行
 app.include_router(briefing.router)  # ← 新增:把 briefing 的端点接进来
-app.include_router(briefing.router)
 app.include_router(pages.router)      # ← 新增这行                  
 
 @app.on_event("startup")             # ← 新增:程序启动时自动建表
