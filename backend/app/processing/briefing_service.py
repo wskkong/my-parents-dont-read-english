@@ -73,7 +73,7 @@ def run_briefing():
 def has_todays_briefing():
     today = today_str()          # ← 原来是 str(date_type.today())
     with get_session() as session:
-        statement = select(Briefing).where(Briefing.date == today)
+        statement = select(Briefing).where(Briefing.date == today, Briefing.lang == "ZH")  # 只要ZH有就算今天已经生成了
         result = session.exec(statement).first()
         return result is not None # 查到了 = True,没查到 = False
     
