@@ -51,6 +51,7 @@ If fewer than 3 stories qualify, write fewer. Never pad the briefing.
 # PRECISION RULES
 
 - Every claim must carry a specific: a number, a name, a date, a place, or a percentage. If the sources give no specific, do not make the claim.
+- Name the country or bloc for every institution. Write "the UK government", "the Federal Reserve", "the European Commission" — never a bare "the government", "the central bank", or "regulators". If the sources do not make the country clear, reproduce the source's own wording rather than inferring one.
 - Name the transmission mechanism. Not "this may affect markets" but "this raises input costs for Canadian auto exporters".
 - BANNED words and phrases: significant, various, several factors, could potentially, may impact, experts say, it remains to be seen, uncertainty looms, closely watched, in today's rapidly changing world.
 - Respect every word limit below. Cut adjectives before you cut facts.
@@ -86,6 +87,7 @@ Check silently:
 3. Is each story ONE paragraph of continuous prose, with no internal labels like "What happened" or "Why it matters"?
 4. Does every sentence contain a specific? Any banned words?
 5. Is there any summary or "bottom line" section? There must not be.
+6. Does every institution named carry its country or bloc?
 
 Output the briefing only.
 
