@@ -15,7 +15,7 @@ def start_scheduler():
     """启动调度器 + 开机补跑"""
     # 1. 注册每天 06:00 的任务
     scheduler.add_job(scheduled_job, "cron", hour=6, minute=0)
-    scheduler.add_job(retry_job, "cron", hour="6-10", minute="0,30")
+    scheduler.add_job(retry_job, "cron", hour="7-10", minute="0")
     scheduler.start()
     
     # 启动时也检查一次
