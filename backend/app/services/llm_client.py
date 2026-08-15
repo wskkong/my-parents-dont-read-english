@@ -14,8 +14,7 @@ def _generate_gemini(prompt, max_retries=3): #this means that we are defining a 
     for i in range(max_retries): #this means that we are trying to generate content for a maximum of max_retries times
         try:
             response = gemini_client.models.generate_content( #this means that we are using the generate_content method from the models module of the gemini_client object to generate content based on the prompt provided
-                #model = "gemini-flash-latest",
-                model = "gemini-fake",
+                model = "gemini-flash-latest",
                 contents = prompt,
                 )
             return response.text
