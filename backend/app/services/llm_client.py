@@ -5,7 +5,7 @@ from app.config import settings #then need to import the settings from the confi
 
 client = genai.Client(api_key=settings.gemini_api_key) #create a client object using the gemini_api_key from the settings
 
-def generate(prompt, max_retries=3): #this means that we are defining a function called generate that takes in a prompt and a maximum number of retries as parameters
+def generate(prompt, max_retries=5): #this means that we are defining a function called generate that takes in a prompt and a maximum number of retries as parameters
     for i in range(max_retries): #this means that we are trying to generate content for a maximum of max_retries times
         try:
             response = client.models.generate_content( #this means that we are using the generate_content method from the models module of the client object to generate content based on the prompt provided
