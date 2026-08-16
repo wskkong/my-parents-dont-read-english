@@ -24,6 +24,7 @@
     <h1>{{ "Daily Briefing" if lang == "EN" else "每日简报" }}</h1>
 
     <div class="toggle">
+        <span>{{ "Language:" if lang == "EN" else "语言调整：" }}</span>
         <a href="/?lang=EN" class="{{ 'active' if lang == 'EN' else '' }}">English</a>
         <a href="/?lang=ZH" class="{{ 'active' if lang == 'ZH' else '' }}">中文</a>
     </div>
@@ -35,7 +36,11 @@
         <a href="#" onclick="setFontSize('large')">{{ "A+" if lang == "EN" else "大" }}</a>
     </div>
 
-    <p><a href="/archive?lang={{ lang }}">{{ "View archive" if lang == "EN" else "查看历史简报" }}</a></p>
+    <p>
+        <a href="/archive?lang={{ lang }}">{{ "View archive" if lang == "EN" else "查看历史简报" }}</a>
+        <a href="/archive?lang={{ lang }}">{{ "View archive" if lang == "EN" else "查看历史简报" }}</a>
+    </p>
+    
 
     {% if briefing %}
         <p class="meta">{{ briefing.date }} · {{ briefing.level }}</p>
