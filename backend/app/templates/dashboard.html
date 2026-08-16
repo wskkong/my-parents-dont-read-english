@@ -14,15 +14,25 @@
         .toggle a.active { background: #333; color: white; }
         .content { }
         .meta { color: #888; font-size: 0.9em; }
+        body.font-small  { font-size: 16px; }
+        body.font-medium { font-size: 18px; }
+        body.font-large  { font-size: 22px; }
     </style>
 </head>
-<body>
+<body class="font-medium">
     <h1>{{ "Daily Briefing" if lang == "EN" else "每日简报" }}</h1>
 
     <div class="toggle">
         <a href="/?lang=EN" class="{{ 'active' if lang == 'EN' else '' }}">English</a>
         <a href="/?lang=ZH" class="{{ 'active' if lang == 'ZH' else '' }}">中文</a>
     </div>
+    
+    <div class="toggle">
+        <a href="#" onclick="setFontSize('small')">{{ "A-" if lang == "EN" else "小" }}</a>
+        <a href="#" onclick="setFontSize('medium')">{{ "A" if lang == "EN" else "中" }}</a>
+        <a href="#" onclick="setFontSize('large')">{{ "A+" if lang == "EN" else "大" }}</a>
+    </div>
+
     <p><a href="/archive?lang={{ lang }}">{{ "View archive" if lang == "EN" else "查看历史简报" }}</a></p>
 
     {% if briefing %}
@@ -47,5 +57,15 @@
     {% else %}
         <p>{{ "No briefing yet. Please generate one first." if lang == "EN" else "还没有简报,请先生成一份。" }}</p>
     {% endif %}
+        <script>
+        function setFontSize(size) {
+            document.body.className = "font-" + size;
+            localStorage.setItem("fontSize", size);
+        }
+        const saved = localStorage.getItem("fontSize");
+        if (saved) {
+            document.body.className = "font-" + saved;
+        }
+    </script>
 </body>
 </html>
